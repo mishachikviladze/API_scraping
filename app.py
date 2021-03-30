@@ -4,6 +4,7 @@ import urllib
 from flask_sqlalchemy import SQLAlchemy
 from db import db
 from waitress import serve
+from eveningbank.runBP import eveningbank
 
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 api = Api(app)
 api.app.config['RESTFUL_JSON'] = {'ensure_ascii': False}
+app.register_blueprint(eveningbank, url_prefix="/eveningbank") 
 
 from resouorces import MyhomeFlatsAppartments_List
 api.add_resource(MyhomeFlatsAppartments_List, '/')
